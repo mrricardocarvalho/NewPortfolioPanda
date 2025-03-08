@@ -4,10 +4,12 @@ const Transaction = require('../models/Transaction');
 const Portfolio = require('../models/Portfolio');
 const Asset = require('../models/Asset');
 
-// GET all transactions
+// It returns all transactions if no portfolioId is provided.
 router.get('/', async (req, res) => {
   try {
-    const transactions = await Transaction.findAll();
+    const { portfolioId } = req.query;
+    const where = portfolioId ? { portfolioId } : {};
+    const transactions = await Transaction.findAll({ where });
     res.json(transactions);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch transactions' });
