@@ -35,6 +35,7 @@ router.post('/', async (req, res) => {
     const portfolio = await Portfolio.create({ name });
     res.status(201).json(portfolio);
   } catch (error) {
+    console.error('Error creating portfolio:', error);
     res.status(500).json({ error: 'Failed to create portfolio' });
   }
 });
