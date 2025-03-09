@@ -6,6 +6,8 @@ import PortfolioEdit from './components/PortfolioEdit';
 import TransactionForm from './components/TransactionForm';
 import TransactionList from './components/TransactionList';
 import Watchlist from './components/Watchlist';
+import AssetSearch from './components/AssetSearch';
+import AssetDetails from './components/AssetDetails';
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
           <li><Link to="/transactions">View Transactions</Link></li>
           <li><Link to="/add-transaction">Add Transaction</Link></li>
           <li><Link to="/watchlist">Watchlist</Link></li>
+          <li><Link to="/search-assets">Search Assets</Link></li>
         </ul>
       </nav>
       <Routes>
@@ -26,6 +29,8 @@ const App = () => {
         <Route path="/transactions" element={<TransactionList />} />
         <Route path="/add-transaction" element={<TransactionForm />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/search-assets" element={<AssetSearch />} />
+        <Route path="/asset/:symbol" element={<AssetDetails />} />
       </Routes>
     </Router>
   );
