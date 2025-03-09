@@ -11,6 +11,8 @@ const portfolioRoutes = require('./routes/portfolioRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const watchlistRoutes = require('./routes/watchlistRoutes');
 const assetRoutes = require('./routes/assetRoutes');
+const authRoutes = require('./routes/authRoutes');
+const auth = require('./middleware/auth');
 
 // Sync models with the database
 sequelize.sync({ force: true }).then(() => {
@@ -52,7 +54,9 @@ app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-app.use('/api/portfolios', portfolioRoutes);
+
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/watchlist', watchlistRoutes);
 app.use('/api/assets', assetRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/portfolios', auth, portfolioRoutes);
