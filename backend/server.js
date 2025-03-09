@@ -24,10 +24,19 @@ sequelize.sync({ force: true }).then(() => {
 app.use(cors());
 app.use(express.json());
 
+// API Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/portfolios', auth, portfolioRoutes);
+app.use('/api/transactions', auth, transactionRoutes);
+app.use('/api/watchlist', auth, watchlistRoutes);
+app.use('/api/assets', assetRoutes);
+
+// Root route
 app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
+// Local assets routes
 app.post('/api/local-assets', async (req, res) => {
   try {
     const { symbol, type } = req.body;
@@ -53,10 +62,3 @@ app.get('/api/local-assets', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-app.use('/api/transactions', transactionRoutes);
-app.use('/api/watchlist', watchlistRoutes);
-app.use('/api/assets', assetRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/portfolios', auth, portfolioRoutes);

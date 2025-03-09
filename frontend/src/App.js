@@ -11,6 +11,7 @@ import AssetDetails from './components/AssetDetails';
 import Register from './components/Register';
 import Login from './components/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import TransactionHistory from './components/TransactionHistory';
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/watchlist" element={<ProtectedRoute><Watchlist /></ProtectedRoute>} />
         <Route path="/search-assets" element={<AssetSearch />} />
         <Route path="/asset/:symbol" element={<AssetDetails />} />
+        <Route path="/portfolio/:id/transactions" element={<ProtectedRoute><TransactionHistory /></ProtectedRoute>} />
       </Routes>
     </Router>
   );
