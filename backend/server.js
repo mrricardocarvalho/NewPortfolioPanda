@@ -9,7 +9,7 @@ const Transaction = require('./models/Transaction');
 const Watchlist = require('./models/Watchlist');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
-// const watchlistRoutes = require('./routes/watchlistRoutes');
+const watchlistRoutes = require('./routes/watchlistRoutes');
 // const assetRoutes = require('./routes/assetRoutes');
 
 
@@ -47,5 +47,5 @@ app.listen(PORT, () => {
 
 app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/transactions', transactionRoutes);
-// app.use('/api/watchlist', watchlistRoutes);
+app.use('/api/watchlist', watchlistRoutes);
 // app.use('/api/assets', assetRoutes);
