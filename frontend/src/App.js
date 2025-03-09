@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Dashboard from './components/Dashboard'; // New import
 import PortfolioList from './components/PortfolioList';
 import PortfolioForm from './components/PortfolioForm';
 import PortfolioEdit from './components/PortfolioEdit';
@@ -18,9 +19,10 @@ const App = () => {
     <Router>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
+          <li><Link to="/">Dashboard</Link></li>
           <li><Link to="/register">Register</Link></li>
           <li><Link to="/login">Login</Link></li>
+          <li><Link to="/portfolios">Portfolios</Link></li>
           <li><Link to="/add-portfolio">Add Portfolio</Link></li>
           <li><Link to="/transactions">View Transactions</Link></li>
           <li><Link to="/add-transaction">Add Transaction</Link></li>
@@ -31,7 +33,8 @@ const App = () => {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<ProtectedRoute><PortfolioList /></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/portfolios" element={<ProtectedRoute><PortfolioList /></ProtectedRoute>} />
         <Route path="/add-portfolio" element={<ProtectedRoute><PortfolioForm /></ProtectedRoute>} />
         <Route path="/edit-portfolio/:id" element={<ProtectedRoute><PortfolioEdit /></ProtectedRoute>} />
         <Route path="/transactions" element={<ProtectedRoute><TransactionList /></ProtectedRoute>} />
