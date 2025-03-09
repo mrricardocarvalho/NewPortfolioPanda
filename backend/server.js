@@ -10,9 +10,7 @@ const Watchlist = require('./models/Watchlist');
 const portfolioRoutes = require('./routes/portfolioRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
 const watchlistRoutes = require('./routes/watchlistRoutes');
-// const assetRoutes = require('./routes/assetRoutes');
-
-
+const assetRoutes = require('./routes/assetRoutes');
 
 // Sync models with the database
 sequelize.sync({ force: true }).then(() => {
@@ -28,7 +26,7 @@ app.get('/', (req, res) => {
   res.send('Backend is running');
 });
 
-app.post('/api/assets', async (req, res) => {
+app.post('/api/local-assets', async (req, res) => {
   try {
     const { symbol, type } = req.body;
     if (!symbol || !type) {
@@ -41,6 +39,15 @@ app.post('/api/assets', async (req, res) => {
   }
 });
 
+app.get('/api/local-assets', async (req, res) => {
+  try {
+    const assets = await Asset.findAll();
+    res.json(assets);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch assets' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
@@ -48,4 +55,4 @@ app.listen(PORT, () => {
 app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/watchlist', watchlistRoutes);
-// app.use('/api/assets', assetRoutes);
+app.use('/api/assets', assetRoutes);
