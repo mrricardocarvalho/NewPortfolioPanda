@@ -1,11 +1,17 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/config');
-const Portfolio = require('./Portfolio');
-const Asset = require('./Asset');
 
 const Transaction = sequelize.define('Transaction', {
-  type: {
-    type: DataTypes.STRING, // Buy or Sell
+  portfolioId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  assetId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  transactionType: {
+    type: DataTypes.ENUM('buy', 'sell'),
     allowNull: false,
   },
   quantity: {
@@ -21,9 +27,5 @@ const Transaction = sequelize.define('Transaction', {
     allowNull: false,
   },
 });
-
-// Define relationships
-Transaction.belongsTo(Portfolio);
-Transaction.belongsTo(Asset);
 
 module.exports = Transaction;
