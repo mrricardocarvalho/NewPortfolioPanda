@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const PortfolioEdit = () => {
@@ -10,7 +10,7 @@ const PortfolioEdit = () => {
   useEffect(() => {
     const fetchPortfolio = async () => {
       try {
-        const response = await axios.get(`/api/portfolios/${id}`);
+        const response = await api.get(`/api/portfolios/${id}`);
         setName(response.data.name);
       } catch (error) {
         console.error('Error fetching portfolio:', error);
@@ -22,7 +22,7 @@ const PortfolioEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/portfolios/${id}`, { name });
+      await api.put(`/api/portfolios/${id}`, { name });
       alert('Portfolio updated successfully');
       navigate('/');
     } catch (error) {

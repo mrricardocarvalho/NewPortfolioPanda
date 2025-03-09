@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 
 const AssetDetails = () => {
   const { symbol } = useParams();
@@ -10,7 +10,7 @@ const AssetDetails = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await axios.get(`/api/assets/details/${symbol}`);
+        const response = await api.get(`/api/assets/details/${symbol}`);
         setDetails(response.data);
         setError('');
       } catch (err) {

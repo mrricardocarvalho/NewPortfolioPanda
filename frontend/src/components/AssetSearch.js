@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { Link } from 'react-router-dom';
 
 const AssetSearch = () => {
@@ -13,7 +13,7 @@ const AssetSearch = () => {
       return;
     }
     try {
-      const response = await axios.get(`/api/assets/search?keyword=${keyword}`);
+      const response = await api.get(`/api/assets/search?keyword=${keyword}`);
       setResults(response.data);
       setError('');
     } catch (err) {

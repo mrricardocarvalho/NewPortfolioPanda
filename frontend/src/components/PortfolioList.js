@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const PortfolioList = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -7,7 +7,7 @@ const PortfolioList = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axios.get('/api/portfolios');
+        const response = await api.get('/api/portfolios');
         setPortfolios(response.data);
       } catch (error) {
         console.error('Error fetching portfolios:', error);

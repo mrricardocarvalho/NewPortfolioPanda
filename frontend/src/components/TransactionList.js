@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const TransactionList = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -9,7 +9,7 @@ const TransactionList = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const response = await axios.get('/api/portfolios');
+        const response = await api.get('/api/portfolios');
         setPortfolios(response.data);
       } catch (error) {
         console.error('Error fetching portfolios:', error);
@@ -22,7 +22,7 @@ const TransactionList = () => {
     if (selectedPortfolio) {
       const fetchTransactions = async () => {
         try {
-          const response = await axios.get(`/api/transactions?portfolioId=${selectedPortfolio}`);
+          const response = await api.get(`/api/transactions?portfolioId=${selectedPortfolio}`);
           setTransactions(response.data);
         } catch (error) {
           console.error('Error fetching transactions:', error);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
@@ -10,9 +10,9 @@ const Watchlist = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const watchlistRes = await axios.get('/api/watchlist');
+        const watchlistRes = await api.get('/api/watchlist');
         setWatchlist(watchlistRes.data);
-        const assetsRes = await axios.get('/api/assets');
+        const assetsRes = await api.get('/api/assets');
         setAssets(assetsRes.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,8 +28,8 @@ const Watchlist = () => {
       return;
     }
     try {
-      await axios.post('/api/watchlist', { assetId: selectedAsset });
-      const watchlistRes = await axios.get('/api/watchlist');
+      await api.post('/api/watchlist', { assetId: selectedAsset });
+      const watchlistRes = await api.get('/api/watchlist');
       setWatchlist(watchlistRes.data);
       setSelectedAsset('');
     } catch (error) {
@@ -40,8 +40,8 @@ const Watchlist = () => {
   // Remove asset from watchlist
   const handleRemove = async (id) => {
     try {
-      await axios.delete(`/api/watchlist/${id}`);
-      const watchlistRes = await axios.get('/api/watchlist');
+      await api.delete(`/api/watchlist/${id}`);
+      const watchlistRes = await api.get('/api/watchlist');
       setWatchlist(watchlistRes.data);
     } catch (error) {
       console.error('Error removing asset from watchlist:', error);

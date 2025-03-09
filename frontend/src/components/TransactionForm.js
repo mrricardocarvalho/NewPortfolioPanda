@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const TransactionForm = () => {
   const [portfolios, setPortfolios] = useState([]);
@@ -14,10 +14,10 @@ const TransactionForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const portfoliosRes = await axios.get('/api/portfolios');
+        const portfoliosRes = await api.get('/api/portfolios');
         setPortfolios(portfoliosRes.data);
         // Temporary endpoint for assets (replace later)
-        const assetsRes = await axios.get('/api/assets');
+        const assetsRes = await api.get('/api/assets');
         setAssets(assetsRes.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -29,7 +29,7 @@ const TransactionForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/transactions', {
+      await api.post('/api/transactions', {
         type,
         quantity: parseFloat(quantity),
         price: parseFloat(price),

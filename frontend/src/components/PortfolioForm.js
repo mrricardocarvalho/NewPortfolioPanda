@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const PortfolioForm = () => {
   const [name, setName] = useState('');
@@ -7,7 +7,7 @@ const PortfolioForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/portfolios', { name });
+      await api.post('/api/portfolios', { name });
       setName('');
       alert('Portfolio created successfully');
     } catch (error) {
